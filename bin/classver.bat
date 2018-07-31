@@ -1,7 +1,7 @@
 @echo off
 set binDir=%~dp0
 set myName=%~n0
-call "%binDir%runjar.bat" "%myName%" %*
+call "%binDir%..\libexec\runjar.bat" "%myName%.jar" %*
 goto :EOF
 
 :: This file is a template for running jar files. Just copy the file and
