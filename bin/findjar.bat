@@ -17,14 +17,17 @@ rem /////////////////////////////////////////////////////////////////////////
 
 setlocal
 
-set myName=%~n0
-set binDir=%~dp0
 set jarName=%~1
 
 if not defined jarName (
-    echo jarName is required
+    echo The name of the jar file to find is required as a command line argument.
     goto :EOF
 )
+
+:: Determine the directory this script is in and then remove the trailing
+:: backslash.
+set binDir=%~dp0
+set binDir=%binDir:~0,-1%
 
 rem DO NOT try to put the search directories in a variable first because
 rem then any space inside an individual directory will cause the directory
@@ -32,18 +35,22 @@ rem to get split into separate words. Putting the list in the "for" loop
 rem allows the spaces in directory names to be preserved with the double-quotes
 rem around each variable.
 set jar=
-for /d %%d in ("%myDir%" "%myDir%\..\lib" "%USERPROFILE%\lib" "%USERPROFILE%\Documents\lib" "%USERPROFILE%\Dropbox\lib") do (
-    if exist "%%~d\%jarName%" (
-        set jar=%%~d\%jarName%
-        goto :endOfSearch
+for /d %%d in ("%binDir%" "%binDir%\..\lib" "%USERPROFILE%\lib" "%USERPROFILE%\Documents\lib" "%USERPROFILE%\Dropbox\lib") do (
+    set potentialJarLocation=%%~d\%jarName%
+    if defined DEBUG echo Checking potentialJarLocation=!potentialJarLocation!
+    if exist "!potentialJarLocation!" (
+        set jar=!potentialJarLocation!
+        goto :searchComplete
     )
 )
-:endOfSearch
+:searchComplete
 
 rem Check for failure to find the application jar.
 if not defined jar (
     echo ERROR: The application jar file %jarName% was not found in any known location. >&2
 )
+
+if defined DEBUG echo %~n0: Returning value jar=%jar%
 
 :: Pass return value back in command line argument #2.
 endlocal & set "%~2=%jar%"
