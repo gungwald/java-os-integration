@@ -1,5 +1,8 @@
-@call "%~dp0"runjar "%~n0" %*
-@goto :EOF
+@echo off
+set binDir=%~dp0
+set myName=%~n0
+call "%binDir%runjar.bat" "%myName%" %*
+goto :EOF
 
 :: This file is a template for running jar files. Just copy the file and
 :: name the copy the same as the jar file you want to run. No changes need

@@ -1,6 +1,8 @@
 @echo off
 
-set jarName=%1
+setlocal
+
+set jarName=%~1
 
 if not defined jarName (
     echo Need argument
@@ -9,10 +11,10 @@ if not defined jarName (
 
 set binDir=%~dp0
 
-call "%binDir%"findjar "%jarName%".jar jarThatWasFound
+call "%binDir%findjar.bat" "%jarName%.jar" jarThatWasFound
 if not defined jarThatWasFound goto :end
 
-call "%binDir%"findjava javaThatWasFound
+call "%binDir%findjava.bat" javaThatWasFound
 if not defined javaThatWasFound goto :end
 
 set /a i=0

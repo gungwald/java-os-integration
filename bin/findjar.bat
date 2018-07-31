@@ -19,7 +19,7 @@ setlocal
 
 set myName=%~n0
 set binDir=%~dp0
-set jarName=%1
+set jarName=%~1
 
 if not defined jarName (
     echo jarName is required
@@ -32,19 +32,17 @@ rem to get split into separate words. Putting the list in the "for" loop
 rem allows the spaces in directory names to be preserved with the double-quotes
 rem around each variable.
 set jar=
-for %%d in ("%myDir%" "%myDir%\..\lib" "%USERPROFILE%\lib" "%USERPROFILE%\Documents\lib" "%USERPROFILE%\Dropbox\lib") do (
-    if exist "%%~d\%jarName%"
-        set jar="%%~d\%jarName%"
+for /d %%d in ("%myDir%" "%myDir%\..\lib" "%USERPROFILE%\lib" "%USERPROFILE%\Documents\lib" "%USERPROFILE%\Dropbox\lib") do (
+    if exist "%%~d\%jarName%" (
+        set jar=%%~d\%jarName%
         goto :endOfSearch
     )
 )
 :endOfSearch
 
 rem Check for failure to find the application jar.
-if defined jar (
-    echo %jar%
-) else (
-    echo ERROR: The application jar file was not found in any known location. >&2
+if not defined jar (
+    echo ERROR: The application jar file %jarName% was not found in any known location. >&2
 )
 
 :: Pass return value back in command line argument #2.
