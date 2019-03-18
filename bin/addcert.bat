@@ -1,6 +1,6 @@
 @echo off
 
-setlocal
+setlocal EnableDelayedExpansion
 
 rem
 rem Addes certificates to the keystore for the Java instance defined by JAVA_HOME.
@@ -24,9 +24,20 @@ if "%*"=="" (
         call :msg Windows protect the directory tree where the keystore file is stored.
         echo.
 
+        rem The path to the keystore in a JDK installation is different from 
+        rem the path in a JRE installation. The JDK has a "jre" subdirectory.
+        
+        if exist "%JAVA_HOME%\jre" (
+            set KEYSTORE=%JAVA_HOME%\jre\lib\security\cacerts
+        ) else (
+            set KEYSTORE=%JAVA_HOME%\lib\security\cacerts
+        )
+
+        call :msg Adding to keystore !KEYSTORE!.
+
         for %%c in (%*) do (
             "%JAVA_HOME%\bin\keytool" -importcert -trustcacerts ^
-                -keystore "%JAVA_HOME%\jre\lib\security\cacerts" ^
+                -keystore "!KEYSTORE!" ^
                 -alias "%%~nc" ^
                 -file %%c ^
                 -storepass changeit
