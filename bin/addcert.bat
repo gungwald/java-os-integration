@@ -34,6 +34,7 @@ if "%*"=="" (
         )
 
         call :msg Adding to keystore !KEYSTORE!.
+        echo.
 
         for %%c in (%*) do (
             "%JAVA_HOME%\bin\keytool" -importcert -trustcacerts ^

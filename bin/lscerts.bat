@@ -8,11 +8,6 @@ rem
 
 set PROGRAM_NAME=%~n0
 
-if "%1"=="" (
-    call :msg You must provide a certificate alias.
-    goto :done
-)
-
 if not defined JAVA_HOME (
 
     call :msg The environment variable JAVA_HOME must be set.
@@ -31,16 +26,11 @@ if not defined JAVA_HOME (
     call :msg Using keystore !KEYSTORE!.
     echo.
 
-    for %%c in (%*) do (
-        "%JAVA_HOME%\bin\keytool" -list ^
-            -v ^
-            -alias %%c ^
-            -keystore "!KEYSTORE!" ^
-            -storepass changeit
-    )
+    "%JAVA_HOME%\bin\keytool" -list ^
+        -keystore "!KEYSTORE!" ^
+        -storepass changeit
 )
 
-:done
 endlocal
 
 rem Pause only if started from the desktop.
