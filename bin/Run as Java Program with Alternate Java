@@ -1,0 +1,23 @@
+#!/bin/bash
+
+java=$(alternatives --display java | grep --only-matching '^/.*/java' | zenity \
+    --list \
+    --title="Run as Java Program with Alterate Java" \
+    --text="Select Java version to run:" \
+    --width=600 --height=200 \
+    --hide-header \
+    --column Java)
+
+export PATH=$(dirname "$java"):$PATH
+
+binDir=$(dirname "$0")
+if [ "$binDir" = "." ]
+then
+    binDir=$(pwd)
+fi
+
+# With terminal
+# Enter arguments
+
+"$binDir/Run as Java Program"
+
