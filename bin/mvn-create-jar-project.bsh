@@ -1,0 +1,45 @@
+#!/usr/bin/env bsh
+
+// BeanShell script to run Maven to create a JAR project.
+//
+// This script requires BeanShell. Install it using the command appropriate to your system:
+//
+//      Fedora: sudo dnf install bsh
+//      RHEL:   sudo yum install bsh
+//      Debyan: sudo apt install bsh
+//      Windows:git clone https://github.com/gungwald/bsh.git; install.bat
+
+final int EXIT_SUCCESS = 0;
+final int EXIT_FAILURE = 1;
+
+int exitCode = EXIT_SUCCESS;
+
+try 
+{
+    BufferedReader stdin = new BufferedReader(new InputStreamReader(System.in));
+
+    print("Enter groupId (example: com.companyname.groupname): ");
+    String group = stdin.readLine();
+
+    print("Enter artifactId (example: my-component-name): ");
+    String artifact = stdin.readLine();
+
+    String[] cmd = new String[]
+    {
+            "mvn", 
+            "archetype:generate",
+            "-DgroupId=" + group,
+            "-DartifactId=" + artifact,
+            "-DarchetypeArtifactId=maven-archetype-quickstart",
+            "-DinteractiveMode=false"
+    };
+    exitCode = new ProcessBuilder(cmd).inheritIO().start().waitFor();
+} 
+catch (Exception e) 
+{
+    print(e.getLocalizedMessage());
+    exitCode = EXIT_FAILURE;
+}
+
+System.exit(exitCode);
+
