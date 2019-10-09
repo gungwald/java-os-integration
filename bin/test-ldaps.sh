@@ -21,10 +21,12 @@ fi
 
 "$JAVA" -XshowSettings:properties -version 2>&1 | grep "    java.home"
 
-OPTS=-Djavax.net.ssl.trustStore=$HOME/.keystore
-OPTS+=" -Djavax.net.debug=ssl"
+OPTS="-Djavax.net.debug=ssl"
+#OPTS+=" -Djavax.net.ssl.trustStore=$HOME/.keystore"
 
-exec "$JAVA" "$OPTS" -cp "$CLASSES_DIR" SSLPoke $LDAPS_HOST $LDAPS_PORT
+echo $OPTS
+
+exec "$JAVA" $OPTS -cp "$CLASSES_DIR" SSLPoke $LDAPS_HOST $LDAPS_PORT
 
 # Values for javax.net.debug:
 #
@@ -51,3 +53,8 @@ exec "$JAVA" "$OPTS" -cp "$CLASSES_DIR" SSLPoke $LDAPS_HOST $LDAPS_PORT
 #    record debugging can be widened with:
 #    plaintext    hex dump of record plaintext
 #    packet       print raw SSL/TLS packets
+#
+# The format for using the additional ssl flags is ssl:[flag] for example:
+#
+# -Djavax.net.debug=ssl:record or -Djavax.net.debug=ssl:handshake.
+
