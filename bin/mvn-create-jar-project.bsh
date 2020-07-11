@@ -1,8 +1,14 @@
 #!/usr/bin/env bsh
+//bin/true; PGMDIR=`dirname "$0"`
+//bin/true; TOPDIR=`dirname "$PGMDIR"`
+//bin/true; LIBDIR="$TOPDIR"/lib
+//bin/true; BSHJAR=`ls "$LIBDIR"/bsh*.jar | tail -1` || exit $?
+//bin/true; exec java -classpath "$BSHJAR" bsh.Interpreter "$@"
 
 // BeanShell script to run Maven to create a JAR project.
 //
-// This script requires BeanShell. Install it using the command appropriate to your system:
+// This script requires BeanShell. Install it using the command appropriate to your 
+// system:
 //
 //      Fedora: sudo dnf install bsh
 //      RHEL:   sudo yum install bsh
