@@ -4,6 +4,13 @@
 //usr/bin/true; BSHJAR=`ls "$LIBDIR"/bsh*.jar | tail -1` || exit $?
 //usr/bin/true; exec java -classpath "$BSHJAR" bsh.Interpreter "$0" "$@"
 
+// ***************************************************************
+// mvn-create-jar-project.sh is preferred over this script because
+// the Java program is easier to develop in an IDE and it runs
+// faster than BeanShell or Groovy... Also this script is not as
+// up-to-date.
+// ***************************************************************
+
 // BeanShell script to run Maven to create a JAR project.
 //
 // This script requires BeanShell. Install it using the command appropriate to your 
