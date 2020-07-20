@@ -5,6 +5,9 @@ import java.util.Properties;
 
 public class KeystoreLister {
 	
+	public static final int EXIT_SUCCESS = 0;
+	public static final int EXIT_FAILURE = 1;
+
 	public static final Properties PROPS = System.getProperties();
 	public static final File JAVA_HOME = new File(PROPS.getProperty("java.home"));
 	public static final File JAVA_BIN_DIR = new File(JAVA_HOME, "bin");
@@ -32,13 +35,16 @@ public class KeystoreLister {
 	}
 	
 	public static void main(String[] args) {
+		int exitCode;
 		try {
 			File keystore = (args.length > 0) ? new File(args[0]) : KEYSTORE;
-			Executor.exec(buildKeystoreListCommand(keystore));
+			exitCode = Executor.exec(buildKeystoreListCommand(keystore));
 		}
 		catch (Exception e) {
 			e.printStackTrace();
+			exitCode = EXIT_FAILURE;
 		}
+		System.exit(exitCode);
 	}
 
 }
