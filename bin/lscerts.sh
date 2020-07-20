@@ -6,7 +6,7 @@
 # shellcheck disable=SC2006
 true
 
-MAIN_CLASS=MavenJarProjectCreator
+MAIN_CLASS=KeystoreLister
 
 getAbsolutePath() {
     cd "`dirname "$1"`" || exit

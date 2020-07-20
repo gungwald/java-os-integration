@@ -1,5 +1,16 @@
 #!/bin/sh
 
+# TODO - Automatically backup the old cacerts and install the new one
+# TODO - Don't run the Perl script. Download ca-bundle.crt from somewhere,
+#        preferrably from a plain http address, avoiding a catch-22.
+#        Or rewrite mk-ca-bundle.pl in Java.
+# TODO - Rewrite in Java so you don't need Bash. Depends on the above
+#        because Java 1.4 may not have the latest certs installed to make
+#        an https connection. Or a working curl would be required. 
+#        Another option would be to distribute the Java program with the
+#        latest cacerts file and specify that as the system keystore in
+#        the startup sh/bat file.
+
 MOZ_CERTS_URL='https://mxr.mozilla.org/mozilla/source/security/nss/lib/ckfw/builtins/certdata.txt?raw=1'
 MK_CA_BUNDLE_URL='https://raw.githubusercontent.com/bagder/curl/master/lib/mk-ca-bundle.pl'
 KEYUTIL_URL='https://github.com/use-sparingly/keyutil/releases/download/0.4.0/keyutil-0.4.0.jar'

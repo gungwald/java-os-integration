@@ -27,7 +27,7 @@ public class MavenJarProjectCreator {
 							"-DarchetypeArtifactId=maven-archetype-quickstart",
 							"-DinteractiveMode=false"
 					};
-					exitCode = new Executor().exec(cmd);
+					exitCode = Executor.exec(cmd);
 				}
 			}
 		} catch (Exception e) {

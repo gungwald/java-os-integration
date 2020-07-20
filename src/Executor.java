@@ -2,7 +2,7 @@ import java.io.*;
 
 public class Executor {
 
-	public void copyLines(InputStream in, PrintStream out) throws IOException {
+	public static void copyLines(InputStream in, PrintStream out) throws IOException {
 		BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(in));
 		while (true) {
 			String line = bufferedReader.readLine();
@@ -14,7 +14,7 @@ public class Executor {
 		out.flush();
 	}
 
-	public int exec(String[] cmd) throws IOException, InterruptedException {
+	public static int exec(String[] cmd) throws IOException, InterruptedException {
 		Process mvn = Runtime.getRuntime().exec(cmd);
 		copyLines(mvn.getInputStream(), System.out);
 		copyLines(mvn.getErrorStream(), System.err);

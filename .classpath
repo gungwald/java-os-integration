@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="src" path="src"/>
+	<classpathentry kind="lib" path="lib/bsh-2.0b6.jar"/>
+	<classpathentry kind="lib" path="lib/classver.jar"/>
+	<classpathentry kind="lib" path="lib/dos2unix.jar"/>
+	<classpathentry kind="lib" path="lib/eastern-time.jar"/>
+	<classpathentry kind="lib" path="lib/est.jar"/>
+	<classpathentry kind="lib" path="lib/file-selector-dialog.jar"/>
+	<classpathentry kind="lib" path="lib/find-non-ascii-characters.jar"/>
+	<classpathentry kind="lib" path="lib/gmt.jar"/>
+	<classpathentry kind="lib" path="lib/jmxterm-1.0.0-uber.jar"/>
+	<classpathentry kind="lib" path="lib/js.jar"/>
+	<classpathentry kind="lib" path="lib/jwget-1.0.jar"/>
+	<classpathentry kind="lib" path="lib/jwhich.jar"/>
+	<classpathentry kind="lib" path="lib/openlookplaf.jar"/>
+	<classpathentry kind="lib" path="lib/print-properties.jar"/>
+	<classpathentry kind="lib" path="lib/remove-extra-carriage-returns.jar"/>
+	<classpathentry kind="lib" path="lib/retrolambda-2.5.6.jar"/>
+	<classpathentry kind="lib" path="lib/sleep.jar"/>
+	<classpathentry kind="lib" path="lib/which.jar"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="output" path="classes"/>
+</classpath>

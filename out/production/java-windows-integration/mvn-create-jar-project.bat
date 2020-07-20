@@ -1,1 +1,0 @@
-@java -classpath %~dp0../classes MavenJarProjectCreator %*
